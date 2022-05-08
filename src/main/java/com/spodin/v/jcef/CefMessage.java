@@ -27,7 +27,7 @@ public class CefMessage implements Serializable {
             StringUtils.escapeField(event.getDevice().getVersion()),
             StringUtils.escapeField(event.getId()),
             StringUtils.escapeField(event.getName()),
-            String.valueOf(event.getSeverity()),
+            event.getSeverity(),
             extensionString(event.getExtension()));
     }
 

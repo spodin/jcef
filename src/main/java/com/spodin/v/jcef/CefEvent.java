@@ -15,7 +15,7 @@ public class CefEvent implements Serializable {
     private final Device device;
     private final String id;
     private final String name;
-    private final int severity;
+    private final String severity;
     private final Extension extension;
 
     private CefEvent(Builder builder) {
@@ -25,10 +25,6 @@ public class CefEvent implements Serializable {
         this.device = notNull(builder.device, "Device is required");
         this.id = notNullOrBlank(builder.id, "id is required");
         this.name = notNullOrBlank(builder.name, "name is required");
-
-        validState(
-            (builder.severity != null && builder.severity >= 0 && builder.severity <= 10),
-            "Severity value from 0 to 10 is allowed");
         this.severity = builder.severity;
 
         this.extension = builder.extension == null ? Extension.empty() : builder.extension;
@@ -95,7 +91,7 @@ public class CefEvent implements Serializable {
     /**
      * @return importance of this event
      */
-    public int getSeverity() {
+    public String getSeverity() {
         return severity;
     }
 
@@ -135,7 +131,7 @@ public class CefEvent implements Serializable {
         private Device device;
         private String id;
         private String name;
-        private Integer severity;
+        private String severity;
         private Extension extension;
 
         private Builder() {
@@ -162,6 +158,10 @@ public class CefEvent implements Serializable {
         }
 
         public Builder severity(int severity) {
+            return severity(String.valueOf(severity));
+        }
+
+        public Builder severity(String severity) {
             this.severity = severity;
             return this;
         }
