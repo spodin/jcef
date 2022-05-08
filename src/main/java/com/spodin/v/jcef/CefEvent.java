@@ -23,9 +23,9 @@ public class CefEvent implements Serializable {
         this.version = builder.version;
 
         this.device = notNull(builder.device, "Device is required");
-        this.id = notNullOrBlank(builder.id, "id is required");
-        this.name = notNullOrBlank(builder.name, "name is required");
-        this.severity = builder.severity;
+        this.id = notNullOrBlank(builder.id, "Id is required");
+        this.name = notNullOrBlank(builder.name, "Name is required");
+        this.severity = notNullOrBlank(builder.severity, "Severity is required");
 
         this.extension = builder.extension == null ? Extension.empty() : builder.extension;
     }
