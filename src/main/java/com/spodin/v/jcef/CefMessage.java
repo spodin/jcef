@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * Represents formatted CEF message.
+ * Formatted CEF message.
  *
  * @author spodin
  */

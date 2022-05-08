@@ -4,9 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * Device values are strings that uniquely identify the type of sending device. No two products may
- * use the same device-vendor and device-product pair. There is no central authority managing
- * these pairs. Event producers have to ensure that they assign unique name pairs.
+ * CEF event device.
  *
  * @author spodin
  */
@@ -17,16 +15,14 @@ public class Device implements Serializable {
     private final String version;
 
     private Device(Builder builder) {
-        this.vendor = notNullOrBlank(builder.vendor, "Vendor is required");
-        this.product = notNullOrBlank(builder.product, "Product is required");
-        this.version = notNullOrBlank(builder.version, "Version is required");
-    }
+        Assertions.notNullOrBlank(builder.vendor, "Vendor is required");
+        this.vendor = builder.vendor;
 
-    private static String notNullOrBlank(String value, String message) {
-        if (value == null || value.isBlank()) {
-            throw new IllegalArgumentException(message);
-        }
-        return value;
+        Assertions.notNullOrBlank(builder.product, "Product is required");
+        this.product = builder.product;
+
+        Assertions.notNullOrBlank(builder.version, "Version is required");
+        this.version = builder.version;
     }
 
     public String getVendor() {
@@ -69,8 +65,9 @@ public class Device implements Serializable {
     }
 
     /**
-     * @return device instance builder
-     * @throws IllegalArgumentException on missing or incorrect parameters
+     * Creates CEF event device builder.
+     *
+     * @return event device builder
      */
     public static Builder builder() {
         return new Builder();
@@ -85,21 +82,51 @@ public class Device implements Serializable {
         private Builder() {
         }
 
+        /**
+         * Sets event device vendor.
+         *
+         * <p>Mandatory.</p>
+         *
+         * @param vendor vendor
+         * @return this builder for further customizations
+         */
         public Builder vendor(String vendor) {
             this.vendor = vendor;
             return this;
         }
 
+        /**
+         * Sets event device product.
+         *
+         * <p>Mandatory.</p>
+         *
+         * @param product product
+         * @return this builder for further customizations
+         */
         public Builder product(String product) {
             this.product = product;
             return this;
         }
 
+        /**
+         * Sets event device version.
+         *
+         * <p>Mandatory.</p>
+         *
+         * @param version version
+         * @return this builder for further customizations
+         */
         public Builder version(String version) {
             this.version = version;
             return this;
         }
 
+        /**
+         * Creates CEF event device with submitted parameters.
+         *
+         * @return CEF event device
+         * @throws IllegalArgumentException on missing or illegal parameters
+         */
         public Device build() {
             return new Device(this);
         }

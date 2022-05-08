@@ -5,6 +5,8 @@ import java.util.regex.Pattern;
 
 /**
  * Holds utility methods to work with CEF related strings.
+ *
+ * @author spodin
  */
 final class StringUtils {
 
