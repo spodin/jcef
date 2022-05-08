@@ -31,7 +31,7 @@ public class CefEvent implements Serializable {
             "Severity value from 0 to 10 is allowed");
         this.severity = builder.severity;
 
-        this.extension = notNull(builder.extension, "Extension is required");
+        this.extension = builder.extension == null ? Extension.empty() : builder.extension;
     }
 
     private static String notNullOrBlank(String value, String message) {
