@@ -19,19 +19,19 @@ public class CefEvent implements Serializable {
     private final Extension extension;
 
     private CefEvent(Builder builder) {
-        Assertions.validState((builder.version >= 0), "Version must be >= 0");
+        Assert.validState((builder.version >= 0), "Version must be >= 0");
         this.version = builder.version;
 
-        Assertions.notNull(builder.device, "Device is required");
+        Assert.notNull(builder.device, "Device is required");
         this.device = builder.device;
 
-        Assertions.notNullOrBlank(builder.id, "Id is required");
+        Assert.notNullOrBlank(builder.id, "Id is required");
         this.id = builder.id;
 
-        Assertions.notNullOrBlank(builder.name, "Name is required");
+        Assert.notNullOrBlank(builder.name, "Name is required");
         this.name = builder.name;
 
-        Assertions.notNullOrBlank(builder.severity, "Severity is required");
+        Assert.notNullOrBlank(builder.severity, "Severity is required");
         this.severity = builder.severity;
 
         this.extension = (builder.extension == null ? Extension.empty() : builder.extension);

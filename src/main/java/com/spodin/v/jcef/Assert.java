@@ -3,9 +3,9 @@ package com.spodin.v.jcef;
 /**
  * @author spodin
  */
-final class Assertions {
+final class Assert {
 
-    private Assertions() {
+    private Assert() {
     }
 
     public static String notNullOrBlank(String value, String message) {

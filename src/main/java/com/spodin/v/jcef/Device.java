@@ -15,13 +15,13 @@ public class Device implements Serializable {
     private final String version;
 
     private Device(Builder builder) {
-        Assertions.notNullOrBlank(builder.vendor, "Vendor is required");
+        Assert.notNullOrBlank(builder.vendor, "Vendor is required");
         this.vendor = builder.vendor;
 
-        Assertions.notNullOrBlank(builder.product, "Product is required");
+        Assert.notNullOrBlank(builder.product, "Product is required");
         this.product = builder.product;
 
-        Assertions.notNullOrBlank(builder.version, "Version is required");
+        Assert.notNullOrBlank(builder.version, "Version is required");
         this.version = builder.version;
     }
 
