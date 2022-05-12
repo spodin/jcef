@@ -1,25 +1,19 @@
 package com.spodin.v.jcef;
 
-import java.io.Serializable;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * Formatted CEF message.
+ * Serializes CEF event to {@code String} according to ArcSight Common Event Format specification.
  *
  * @author spodin
  */
-public class CefMessage implements Serializable {
+public class StdCefSerializer implements CefSerializer<String> {
 
     private static final String FIELDS_DELIMITER = "|";
 
-    private final String value;
-
-    public CefMessage(CefEvent event) {
-        this.value = composeMessage(event);
-    }
-
-    private String composeMessage(CefEvent event) {
+    @Override
+    public String serialize(CefEvent event) {
         return String.join(FIELDS_DELIMITER,
             event.getFormatIdentifier(),
             StringUtils.escapeField(event.getDevice().getVendor()),
@@ -40,14 +34,5 @@ public class CefMessage implements Serializable {
                 StringUtils.escapeExtensionValue(it.getValue())))
             .map(it -> String.format("%s=%s", it.getKey(), it.getValue()))
             .collect(Collectors.joining(" "));
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    @Override
-    public String toString() {
-        return value;
     }
 }
