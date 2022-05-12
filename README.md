@@ -1,6 +1,6 @@
 # JCef
 
-Tiny library to work with CEF (Common Event Format) format.
+Tiny, zero-Dependency library to work with CEF (Common Event Format) format.
 
 CEF (Common Event Format) is a standard for the interoperability of event or log generating devices 
 and applications. The standard defines a syntax for log records. It comprises of a standard prefix 
