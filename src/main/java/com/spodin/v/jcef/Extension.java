@@ -12,10 +12,12 @@ import java.util.Map;
  */
 public class Extension implements Serializable {
 
+    private static final Extension EMPTY = new Builder(Collections.emptyMap()).build();
+
     private final Map<String, String> fields;
 
     private Extension(Builder builder) {
-        this.fields = builder.fields;
+        this.fields = Collections.unmodifiableMap(builder.fields);
     }
 
     Map<String, String> getFields() {
@@ -33,7 +35,7 @@ public class Extension implements Serializable {
      * @return empty extension
      */
     public static Extension empty() {
-        return new Builder(Collections.emptyMap()).build();
+        return EMPTY;
     }
 
     /**

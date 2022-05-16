@@ -37,4 +37,18 @@ public class StdCefSerializerTest {
             "CEF:0|iPlatform|USO|1|some_event|This event has been occurred|10|",
             SERIALIZER.serialize(event));
     }
+
+    @Test
+    void emptyExtension() {
+        var event = CefEvent.builder()
+            .device(Device.builder().vendor("iPlatform").product("USO").version("1").build())
+            .eventId(EventId.of("some_event", "This event has been occurred"))
+            .extension(Extension.empty())
+            .severity(10)
+            .build();
+
+        Assertions.assertEquals(
+            "CEF:0|iPlatform|USO|1|some_event|This event has been occurred|10|",
+            SERIALIZER.serialize(event));
+    }
 }
