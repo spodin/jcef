@@ -13,8 +13,7 @@ public class CefEvent implements Serializable {
 
     private final int version;
     private final Device device;
-    private final String id;
-    private final String name;
+    private final EventId eventId;
     private final String severity;
     private final Extension extension;
 
@@ -25,11 +24,8 @@ public class CefEvent implements Serializable {
         Assert.notNull(builder.device, "Device is required");
         this.device = builder.device;
 
-        Assert.notNullOrBlank(builder.id, "Id is required");
-        this.id = builder.id;
-
-        Assert.notNullOrBlank(builder.name, "Name is required");
-        this.name = builder.name;
+        Assert.notNull(builder.eventId, "EventId is required");
+        this.eventId = builder.eventId;
 
         Assert.notNullOrBlank(builder.severity, "Severity is required");
         this.severity = builder.severity;
@@ -50,11 +46,11 @@ public class CefEvent implements Serializable {
     }
 
     public String getId() {
-        return id;
+        return eventId.getId();
     }
 
     public String getName() {
-        return name;
+        return eventId.getName();
     }
 
     public String getSeverity() {
@@ -71,8 +67,7 @@ public class CefEvent implements Serializable {
             "formatIdentifier='" + getFormatIdentifier() + '\'' +
             ", version=" + version +
             ", device=" + device +
-            ", id='" + id + '\'' +
-            ", name='" + name + '\'' +
+            ", eventId=" + eventId +
             ", severity='" + severity + '\'' +
             ", extension=" + extension +
             '}';
@@ -93,8 +88,7 @@ public class CefEvent implements Serializable {
 
         private int version = DEFAULT_FORMAT_VERSION;
         private Device device;
-        private String id;
-        private String name;
+        private EventId eventId;
         private String severity;
         private Extension extension;
 
@@ -131,38 +125,15 @@ public class CefEvent implements Serializable {
         }
 
         /**
-         * Sets event id (Device Event Class ID) is a unique identifier per event-type. This can be
-         * a string or an integer. Device Event ClassID identifies the type of event reported. In
-         * the intrusion detection system (IDS) world, each signature or rule that detects certain
-         * activity has a unique Device Event Class ID assigned. This is a requirement for other
-         * types of devices as well, and helps correlation engines process the events.
-         * Also known as Signature ID.
+         * Sets event identifier.
          *
          * <p>Mandatory.</p>
          *
-         * @param id event id
+         * @param eventId event identifier
          * @return this builder for further customizations
          */
-        public Builder id(String id) {
-            this.id = id;
-            return this;
-        }
-
-        /**
-         * Sets a string representing a human-readable and understandable description of the event.
-         *
-         * <p>The event name should not contain information that is specifically mentioned in other
-         * fields. For example: "Port scan from 10.0.0.1targeting 20.1.1.1" is not a good event name.
-         * It should be: "Port scan". The other information is redundant and can be picked up from
-         * the other fields.</p>
-         *
-         * <p>Mandatory.</p>
-         *
-         * @param name event name
-         * @return this builder for further customizations
-         */
-        public Builder name(String name) {
-            this.name = name;
+        public Builder eventId(EventId eventId) {
+            this.eventId = eventId;
             return this;
         }
 

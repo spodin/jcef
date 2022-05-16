@@ -11,8 +11,7 @@ public class StdCefSerializerTest {
     void correctCefMessageShouldBeCreated() {
         var event = CefEvent.builder()
             .device(Device.builder().vendor("iPlatform").product("USO").version("1").build())
-            .id("some_event")
-            .name("This event has been occurred")
+            .eventId(EventId.of("some_event", "This event has been occurred"))
             .extension(Extension.builder().add("ip", "10.91.161.67").add("source", "my_server").build())
             .severity(10)
             .build();
@@ -30,8 +29,7 @@ public class StdCefSerializerTest {
     void extensionIsNotMandatory() {
         var event = CefEvent.builder()
             .device(Device.builder().vendor("iPlatform").product("USO").version("1").build())
-            .id("some_event")
-            .name("This event has been occurred")
+            .eventId(EventId.of("some_event", "This event has been occurred"))
             .severity(10)
             .build();
 
